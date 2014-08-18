@@ -1,0 +1,39 @@
+{
+  "name": "jquery-annotate",
+  "version": "0.0.1",
+  "description": "jQuery plugins that allows for annotating a live website by guests",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khrome83/Annotate-The-Web.git"
+  },
+  "keywords": [
+    "jQuery",
+    "Annotate",
+    "Plugin"
+  ],
+  "author": "Zane Milakovic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/khrome83/Annotate-The-Web/issues"
+  },
+  "homepage": "https://github.com/khrome83/Annotate-The-Web",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-concat": "^2.3.4",
+    "gulp-cssmin": "^0.1.6",
+    "gulp-jshint": "^1.8.4",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglifyjs": "^0.4.2",
+    "gulp-util": "^3.0.0",
+    "jshint-stylish": "^0.4.0"
+  }
+}
