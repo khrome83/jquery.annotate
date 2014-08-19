@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
-    minifycss = require('gulp-minifycss'),
+    minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
@@ -17,6 +17,9 @@ var options = {
 	},
 	rename: {
 		suffix: '.min'
+	},
+	clean: {
+		read: false
 	}
 };
 
@@ -34,6 +37,7 @@ gulp.task('scripts', function() {
 	return gulp.src(paths.scripts)
         .pipe(jshint('.jshintrc'))
         .pipe(jshint.reporter('jshint-stylish'))
+		.pipe(gulp.dest('./build'))
         .pipe(uglify())
 		.pipe(rename(options.rename))
         .pipe(gulp.dest('./build'));
@@ -42,32 +46,19 @@ gulp.task('scripts', function() {
 gulp.task('styles', function() {
     return gulp.src(paths.styles)
 		.pipe(autoprefixer(["last 1 version", "> 1%", "ie 8", "ie 7"], options.autoprefixer))
+		.pipe(gulp.dest('./build'))
 		.pipe(minifycss())
 		.pipe(rename(options.rename))
-        .pipe(gulp.dest('./css'));
+        .pipe(gulp.dest('./build'));
 });
 
-gulp.task('watch', ['connect', 'styles', 'scripts'], function() {
-    // Watch .scss files
-    gulp.watch(paths.sass, ['styles']);
-
-    // Watch .js files
-    gulp.watch(paths.scripts, ['scripts']);
-
-    // Watch .html files  
-    gulp.watch(paths.html, ['html']);
+gulp.task('clean', function() {
+	return gulp.src('./build', options.clean)
+		.pipe(clean());
 });
 
-gulp.task('html', function() {
-    return gulp.src(paths.html)
-        .pipe(connect.reload())
-});
-
-gulp.task('connect', function() {
-    connect.server(options.server);
-});
-
-gulp.task('default', function() {
-    gulp.start('watch');
+gulp.task('default', ['clean'], function() {
+    gulp.start('styles');
+    gulp.start('scripts');
 });
 
