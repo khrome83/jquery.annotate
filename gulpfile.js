@@ -1,12 +1,5 @@
 var gulp = require("gulp"),
-    autoprefixer = require("gulp-autoprefixer"),
-    minifycss = require("gulp-minify-css"),
-    jshint = require("gulp-jshint"),
-    uglify = require("gulp-uglify"),
-    rename = require("gulp-rename"),
-    clean = require("gulp-clean"),
-    concat = require("gulp-concat"),
-    util = require("gulp-util");
+	plugins = require("gulp-load-plugins")();
 
 // Options
 var options = {
@@ -24,7 +17,7 @@ var options = {
 };
 
 var paths = {
- 	scripts: [
+	scripts: [
 	 	"src/*.js"
 	],
 	styles: [
@@ -32,44 +25,48 @@ var paths = {
 	]
 };
 
-gulp.task("scripts", function() {
+gulp.task("scripts", function () {
 	"use strict";
 	return gulp.src(paths.scripts)
-        .pipe(jshint(".jshintrc"))
-        .pipe(jshint.reporter("jshint-stylish"))
+		.pipe(plugins.jshint(".jshintrc"))
+		.pipe(plugins.jshint.reporter("jshint-stylish"))
 		.pipe(gulp.dest("./build"))
-        .pipe(uglify())
-		.pipe(rename(options.rename))
-        .pipe(gulp.dest("./build"));
+		.pipe(plugins.filesize())
+		.pipe(plugins.uglify())
+		.pipe(plugins.rename(options.rename))
+		.pipe(gulp.dest("./build"))
+		.pipe(plugins.filesize());
 });
 
-gulp.task("styles", function() {
+gulp.task("styles", function () {
 	"use strict";
-    return gulp.src(paths.styles)
-		.pipe(autoprefixer(["last 1 version", "> 1%", "ie 8", "ie 7"], options.autoprefixer))
+	return gulp.src(paths.styles)
+		.pipe(plugins.autoprefixer(["last 1 version", "> 1%", "ie 8", "ie 7"], options.autoprefixer))
 		.pipe(gulp.dest("./build"))
-		.pipe(minifycss())
-		.pipe(rename(options.rename))
-        .pipe(gulp.dest("./build"));
+		.pipe(plugins.filesize())
+		.pipe(plugins.minifyCss())
+		.pipe(plugins.rename(options.rename))
+		.pipe(gulp.dest("./build"))
+		.pipe(plugins.filesize());
 });
 
-gulp.task("clean", function() {
+gulp.task("clean", function () {
 	"use strict";
 	return gulp.src("./build", options.clean)
-		.pipe(clean());
+		.pipe(plugins.clean());
 });
 
-gulp.task("default", ["clean"], function() {
+gulp.task("default", ["clean"], function () {
 	"use strict";
 	gulp.start("watch");
 });
 
-gulp.task("watch", ["styles", "scripts"], function() {
+gulp.task("watch", ["styles", "scripts"], function () {
 	"use strict";
 
-    // Watch .css files
-    gulp.watch(paths.styles, ["styles"]);
+	// Watch .css files
+	gulp.watch(paths.styles, ["styles"]);
 
-    // Watch .js files
-    gulp.watch(paths.scripts, ["scripts"]);
+	// Watch .js files
+	gulp.watch(paths.scripts, ["scripts"]);
 });
