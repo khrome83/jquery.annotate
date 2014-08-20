@@ -3,14 +3,6 @@
 
 	var opts;
 
-	$.fn.annotate.defaults = {
-		color: "#556f2f",
-		backgroundColor: "white",
-		defaultAction: function () {
-			console.log("callback");
-		}
-	};
-
 	$.fn.annotate = function (options, action) {
 
 		opts = $.extend({}, $.fn.annotate.defaults, options);
@@ -35,6 +27,14 @@
 			
 			});
 		*/
+	};
+
+	$.fn.annotate.defaults = {
+		color: "#556f2f",
+		backgroundColor: "white",
+		defaultAction: function () {
+			console.log("callback");
+		}
 	};
 
 	/* Private Functions */
