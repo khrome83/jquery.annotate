@@ -1,0 +1,39 @@
+{
+	"name": "annotate",
+	"title": "jQuery Annotate",
+	"description": "jQuery plugin to allow annotation of a website to guests.",
+	"keywords": [
+		"website",
+		"development",
+		"annotation",
+		"usability",
+		"tracking",
+		"UX",
+		"feedback"
+	],
+	"version": "0.0.1",
+	"author": {
+		"name": "Zane Milakovic",
+		"url": "https://github.com/khrome83"
+	},
+	"maintainers": [
+		{
+			"name": "Zane Milakovic",
+			"email": "zane.milakovic@outlook.com",
+			"url": "http://zanemilakovic.com"
+		}
+	],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/khrome83/Annotate-The-Web/blob/master/LICENSE"
+		}
+	],
+	"bugs": "https://github.com/khrome83/Annotate-The-Web/issues",
+	"homepage": "https://github.com/khrome83/Annotate-The-Web",
+	"docs": "https://github.com/khrome83/Annotate-The-Web",
+	"download": "https://github.com/khrome83/Annotate-The-Web",
+	"dependencies": {
+		"jquery": ">=1.8"
+	}
+}
