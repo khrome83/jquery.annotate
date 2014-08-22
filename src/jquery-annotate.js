@@ -1,8 +1,10 @@
 (function ($) {
 	"use strict";
 
-	var opts;
+	var opts,
+		svgNamespace = "http://www.w3.org/2000/svg";
 
+//	The Plugin Main Code
 	$.fn.annotate = function (options, action) {
 
 		opts = $.extend({}, $.fn.annotate.defaults, options);
@@ -18,6 +20,7 @@
 
 		debug(this);
 		doAction(this);
+		drawSVG(this);
 		return this;
 
 		/*
@@ -29,6 +32,7 @@
 		*/
 	};
 
+//	Public Settings
 	$.fn.annotate.defaults = {
 		color: "#556f2f",
 		backgroundColor: "white",
@@ -37,7 +41,7 @@
 		}
 	};
 
-	/* Private Functions */
+//	Private Functions
 	function debug(obj) {
 		if (window.console && window.console.log) {
 			window.console.log("hilight selection count: " + obj.length);
@@ -48,8 +52,18 @@
 		opts.defaultAction.call(obj);
 	}
 
+	function drawSVG(obj) {
+		var shape = document.createElementNS(svgNamespace, "circle");
+		shape.setAttribute("cx", 25);
+		shape.setAttribute("cy", 25);
+		shape.setAttribute("r", 20);
+		shape.setAttribute("fill", "green");
+		
+		obj.append("<svg></svg>");
+		obj.find("svg").append(shape);
+	}
 
-	/* Public Exposed Functions */
+//	Public Functions
 	$.fn.annotate.publicFunction = function (txt) {
 		return "<strong>" + txt + "</strong>";
 	};
